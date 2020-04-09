@@ -154,9 +154,63 @@ public class Game {
         String result = "None";
         //Student code goes here ...
 
-     return result;
+        boolean gridFilled = false; //veryfied content of cell
+        boolean check = false; //check if there is win
+        char g = grid[0][0]; //taking a sign, winning sign
 
-}
+        // Check content of cell
+        if (!gridFilled) {
+            boolean blankPresent = false;
+            for (int i = 0; i <= 2; i++) {
+                for (int j = 0; j <= 2; j++) {
+                    blankPresent = (grid[i][j] == '-');
+                    if (blankPresent) break;
+                }
+                if (blankPresent) break;
+            }
+            if (!blankPresent) gridFilled = true;
+
+            for (int i = 0; i < 3; i++) {
+                if ((grid[i][0] == grid[i][1]) && (grid[i][1] == grid[i][2])) {
+                    g = grid[i][2];
+                    check = true;
+                }
+            }
+
+            for (int i = 0; i < 3; i++) {
+                if ((grid[0][i] == grid[1][i]) && (grid[1][i] == grid[2][i])) {
+                    g = grid[2][i];
+                    check = true;
+                }
+            }
+
+            if ((grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) {
+                 g = grid[2][2];
+                 check = true;
+            }
+
+            if ((grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) {
+                g = grid[2][0];
+                check = true;
+            }
+
+            if (check && (g != '-')) {
+                result = (toUpperCase(g) + " " + "wins");
+            }
+            int maxmoves = 0;
+            for(int i=0;i<3;i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (!(grid[i][j] == '-'))
+                    maxmoves += 1;
+                 }
+            }
+        if (maxmoves==9)
+            return "Tie";
+
+
+        }
+     return result;
+    }
 
     /**
      * Main function
