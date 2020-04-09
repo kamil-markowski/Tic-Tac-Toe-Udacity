@@ -160,7 +160,7 @@ public class Game {
 
         // Check content of cell
         if (!gridFilled) {
-            boolean blankPresent = false;
+            boolean blankPresent = false;// If blanks
             for (int i = 0; i <= 2; i++) {
                 for (int j = 0; j <= 2; j++) {
                     blankPresent = (grid[i][j] == '-');
@@ -168,46 +168,46 @@ public class Game {
                 }
                 if (blankPresent) break;
             }
-            if (!blankPresent) gridFilled = true;
+            if (!blankPresent) gridFilled = true; //If no blanks
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++) {//check rows for win
                 if ((grid[i][0] == grid[i][1]) && (grid[i][1] == grid[i][2])) {
                     g = grid[i][2];
                     check = true;
                 }
             }
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++) {//check columns for win
                 if ((grid[0][i] == grid[1][i]) && (grid[1][i] == grid[2][i])) {
                     g = grid[2][i];
                     check = true;
                 }
             }
 
-            if ((grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) {
+            if ((grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) {//check win across from 0,0 to 2,2
                  g = grid[2][2];
                  check = true;
             }
 
-            if ((grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) {
+            if ((grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) {//check win across from 0,2 to 2,0
                 g = grid[2][0];
                 check = true;
             }
 
-            if (check && (g != '-')) {
+            if (check && (g != '-')) {// If there is win and winning 3 not "-"
                 result = (toUpperCase(g) + " " + "wins");
             }
-            int maxmoves = 0;
+        int maxmoves = 0;//counting max moves
             for(int i=0;i<3;i++) {
                 for (int j = 0; j < 3; j++) {
                     if (!(grid[i][j] == '-'))
                     maxmoves += 1;
                  }
             }
-        if (maxmoves==9)
+        if (maxmoves==9 && (!check)) {
             return "Tie";
 
-
+        }
         }
      return result;
     }
